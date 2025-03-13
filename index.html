@@ -3,47 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Таблица расписания</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.json">
+  <title>Отправка письма через EmailJS</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-  <h1>Заполните расписание</h1>
-  <table id="schedule-table">
-    <thead>
-      <tr>
-        <th>Имя</th>
-        <th>День недели</th>
-        <th>Время (от)</th>
-        <th>Время (до)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><input type="text" class="name" placeholder="Ваше имя"></td>
-        <td>
-          <select class="day">
-            <option value="Понедельник">Понедельник</option>
-            <option value="Вторник">Вторник</option>
-            <option value="Среда">Среда</option>
-            <option value="Четверг">Четверг</option>
-            <option value="Пятница">Пятница</option>
-            <option value="Суббота">Суббота</option>
-            <option value="Воскресенье">Воскресенье</option>
-          </select>
-        </td>
-        <td>
-          <input type="time" class="time-start" min="07:00" max="00:00">
-        </td>
-        <td>
-          <input type="time" class="time-end" min="07:00" max="00:00">
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <button id="add-row">Добавить строку</button>
-  <button id="submit">Отправить на почту</button>
+  <h1>Заполните форму</h1>
+  <form id="schedule-form">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name" placeholder="Ваше имя" required>
 
-  <script src="app.js"></script>
+    <label for="day">День недели:</label>
+    <select id="day" name="day" required>
+      <option value="Понедельник">Понедельник</option>
+      <option value="Вторник">Вторник</option>
+      <option value="Среда">Среда</option>
+      <option value="Четверг">Четверг</option>
+      <option value="Пятница">Пятница</option>
+      <option value="Суббота">Суббота</option>
+      <option value="Воскресенье">Воскресенье</option>
+    </select>
+
+    <label for="time-start">Время (от):</label>
+    <input type="time" id="time-start" name="time-start" min="07:00" max="00:00" required>
+
+    <label for="time-end">Время (до):</label>
+    <input type="time" id="time-end" name="time-end" min="07:00" max="00:00" required>
+
+    <button type="submit">Отправить на почту</button>
+  </form>
+
+  <script>
+    // Инициализация EmailJS
+    emailjs.init('Riko'); // Замените на ваш User ID
+
+    // Функция отправки письма
+    function sendEmail(data) {
+      const templateParams = {
+        to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
+        data: data // Данные для шаблона
+      };
+
+      emailjs.send('service_2h0bb4p', 'template_46n3nnd', templateParams)
+        .then((response) => {
+          alert('Письмо отправлено!');
+          console.log('Письмо отправлено:', response);
+        })
+        .catch((error) => {
+          alert('Ошибка при отправке письма.');
+          console.error('Ошибка:', error);
+        });
+    }
+
+    // Обработка отправки формы
+    document.getElementById('schedule-form').addEventListener('submit', (event) => {
+      event.preventDefault(); // Отменяем стандартное поведение формы
+
+      // Собираем данные из формы
+      const formData = {
+        name: document.getElementById('name').value,
+        day: document.getElementById('day').value,
+        timeStart: document.getElementById('time-start').value,
+        timeEnd: document.getElementById('time-end').value
+      };
+
+      // Отправляем данные на почту
+      sendEmail([formData]);
+    });
+  </script>
 </body>
 </html>
