@@ -108,7 +108,7 @@
 
     // Функция для отправки данных в Google Sheets
     function saveToGoogleSheets(data) {
-      return fetch('https://script.google.com/macros/s/AKfycbzqmKxaKISfMrSEFNnN2mqa_82jAj62P4CYmEcI89epcE9nTXV0WUieTmTQUqMf53u-/exec', {
+      return fetch('https://script.google.com/macros/s/AKfycbxmkQ9zBCFjzLUURn8NYAjiEpOpk2OKfGcGQmn_sk2LuDeKIY0OqMnw34NVkdXzaJWM-/exec', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -119,7 +119,7 @@
 
     // Обработка отправки итоговой таблицы
     document.getElementById('send-email').addEventListener('click', () => {
-      fetch('https://script.google.com/macros/s/AKfycbzqmKxaKISfMrSEFNnN2mqa_82jAj62P4CYmEcI89epcE9nTXV0WUieTmTQUqMf53u-/exec?function=sendEmailWithTable')
+      fetch('https://script.google.com/macros/s/AKfycbxmkQ9zBCFjzLUURn8NYAjiEpOpk2OKfGcGQmn_sk2LuDeKIY0OqMnw34NVkdXzaJWM-/exec?function=sendEmailWithTable')
         .then(() => alert('Итоговая таблица отправлена на почту!'))
         .catch((error) => {
           alert('Ошибка при отправке таблицы.');
