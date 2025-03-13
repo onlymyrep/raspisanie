@@ -73,6 +73,7 @@
     <textarea id="comment" name="comment" placeholder="Например, причина отпуска"></textarea>
 
     <button type="submit">Отправить данные</button>
+    <button type="button" id="send-email">Отправить итоговую таблицу на почту</button>
   </form>
 
   <script>
@@ -97,6 +98,7 @@
       saveToGoogleSheets(formData)
         .then(() => {
           alert('Данные успешно отправлены!');
+          document.getElementById('schedule-form').reset(); // Очистка формы
         })
         .catch((error) => {
           alert('Ошибка при отправке данных.');
@@ -104,9 +106,9 @@
         });
     });
 
-    // Функция для отправки данных в Google Sheets
+x    // Функция для отправки данных в Google Sheets
     function saveToGoogleSheets(data) {
-      return fetch('https://script.google.com/macros/s/AKfycbz3hTMihjxcaBjjVDYe3yBy09cg-q4jPdCyKd5U3PJ-ZHZ8wStazBA3uhv_GKqrwsrL/exec', {
+      return fetch('https://script.google.com/macros/s/AKfycbzqmKxaKISfMrSEFNnN2mqa_82jAj62P4CYmEcI89epcE9nTXV0WUieTmTQUqMf53u-/exec', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -115,22 +117,15 @@
       });
     }
 
-    // Функция для отправки итоговой таблицы на почту
-    function sendFinalEmail() {
-      const templateParams = {
-        to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
-        subject: 'Итоговая таблица расписания',
-        message: 'Здесь будет итоговая таблица'
-      };
-
-      emailjs.send('service_2h0bb4p', 'template_kzxu2rt', templateParams)
-        .then((response) => {
-          console.log('Письмо отправлено!', response);
-        })
+    // Обработка отправки итоговой таблицы
+    document.getElementById('send-email').addEventListener('click', () => {
+      fetch('https://script.google.com/macros/s/AKfycbzqmKxaKISfMrSEFNnN2mqa_82jAj62P4CYmEcI89epcE9nTXV0WUieTmTQUqMf53u-/exec?function=sendEmailWithTable')
+        .then(() => alert('Итоговая таблица отправлена на почту!'))
         .catch((error) => {
+          alert('Ошибка при отправке таблицы.');
           console.error('Ошибка:', error);
         });
-    }
+    });
   </script>
 </body>
 </html>
