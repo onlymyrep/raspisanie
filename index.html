@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таблица расписания</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <h1>Заполните расписание</h1>
+  <table id="schedule-table">
+    <thead>
+      <tr>
+        <th>Имя</th>
+        <th>День недели</th>
+        <th>Время (от)</th>
+        <th>Время (до)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="text" class="name" placeholder="Ваше имя"></td>
+        <td>
+          <select class="day">
+            <option value="Понедельник">Понедельник</option>
+            <option value="Вторник">Вторник</option>
+            <option value="Среда">Среда</option>
+            <option value="Четверг">Четверг</option>
+            <option value="Пятница">Пятница</option>
+            <option value="Суббота">Суббота</option>
+            <option value="Воскресенье">Воскресенье</option>
+          </select>
+        </td>
+        <td>
+          <input type="time" class="time-start" min="07:00" max="00:00">
+        </td>
+        <td>
+          <input type="time" class="time-end" min="07:00" max="00:00">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button id="add-row">Добавить строку</button>
+  <button id="submit">Отправить на почту</button>
+
+  <script src="app.js"></script>
+</body>
+</html>
