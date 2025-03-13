@@ -54,8 +54,6 @@
       <option value="Пятница">Пятница</option>
       <option value="Суббота">Суббота</option>
       <option value="Воскресенье">Воскресенье</option>
-      <option value="Выходной">Выходной</option>
-      <option value="Отпуск">Отпуск</option>
     </select>
 
     <label for="time-start">Время (от):</label>
@@ -64,8 +62,15 @@
     <label for="time-end">Время (до):</label>
     <input type="time" id="time-end" name="time-end" min="07:00" max="00:00">
 
+    <label for="status">Статус:</label>
+    <select id="status" name="status" required>
+      <option value="Рабочий день">Рабочий день</option>
+      <option value="Выходной">Выходной</option>
+      <option value="Отпуск">Отпуск</option>
+    </select>
+
     <label for="comment">Комментарий:</label>
-    <textarea id="comment" name="comment" placeholder="Например, выходной или отпуск"></textarea>
+    <textarea id="comment" name="comment" placeholder="Например, причина отпуска"></textarea>
 
     <button type="submit">Отправить данные</button>
   </form>
@@ -74,7 +79,7 @@
     // Инициализация EmailJS
     emailjs.init('9_tMAQ1P04QhyA085'); // Ваш User ID
 
-    // Функция отправки данных
+    // Обработка отправки формы
     document.getElementById('schedule-form').addEventListener('submit', (event) => {
       event.preventDefault(); // Отменяем стандартное поведение формы
 
@@ -82,12 +87,13 @@
       const formData = {
         name: document.getElementById('name').value,
         day: document.getElementById('day').value,
-        timeStart: document.getElementById('time-start').value || 'Выходной',
-        timeEnd: document.getElementById('time-end').value || 'Выходной',
+        timeStart: document.getElementById('time-start').value || 'Не указано',
+        timeEnd: document.getElementById('time-end').value || 'Не указано',
+        status: document.getElementById('status').value,
         comment: document.getElementById('comment').value || 'Нет комментария'
       };
 
-      // Отправляем данные в Google Sheets (или другую базу данных)
+      // Отправляем данные в Google Sheets
       saveToGoogleSheets(formData)
         .then(() => {
           alert('Данные успешно отправлены!');
@@ -100,8 +106,6 @@
 
     // Функция для отправки данных в Google Sheets
     function saveToGoogleSheets(data) {
-      // Здесь должен быть код для отправки данных в Google Sheets через API
-      // Например, используя Google Apps Script или Fetch API
       return fetch('https://script.google.com/macros/s/AKfycbz3hTMihjxcaBjjVDYe3yBy09cg-q4jPdCyKd5U3PJ-ZHZ8wStazBA3uhv_GKqrwsrL/exec', {
         method: 'POST',
         body: JSON.stringify(data),
