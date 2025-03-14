@@ -5,124 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расписание сотрудников</title>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #2b2b2b;
-        color: #d3c1b2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-
-    .container {
-        max-width: 800px;
-        width: 100%;
-        padding: 20px;
-        background-color: #3a3a3a;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        table-layout: fixed; /* Фиксированная ширина таблицы */
-        font-size: 14px; /* Уменьшенный шрифт */
-    }
-
-    th, td {
-        border: 1px solid #555;
-        padding: 8px; /* Уменьшенный отступ */
-        text-align: center; /* Выравнивание по центру */
-    }
-
-    th {
-        background-color: #4a3f35;
-    }
-
-    input, select {
-        width: 100%;
-        padding: 6px; /* Уменьшенный отступ */
-        margin: 2px 0; /* Уменьшенный отступ */
-        background-color: #3a3a3a;
-        color: #d3c1b2;
-        border: 1px solid #555;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-size: 14px; /* Уменьшенный шрифт */
-        text-align: center; /* Выравнивание по центру */
-    }
-
-    input:focus, select:focus {
-        border-color: #8b735b;
-        outline: none;
-    }
-
-    /* Уменьшение ширины ячейки "День" */
-    td:nth-child(2) {
-        width: 30px; /* Минимальная ширина ячейки "День" */
-    }
-
-    /* Уменьшение ширины ячейки "Имя" */
-    td:nth-child(1) {
-        width: 80px; /* Минимальная ширина ячейки "Имя" */
-    }
-
-    /* Увеличение ширины ячеек времени */
-    td:nth-child(3),
-    td:nth-child(4) {
-        width: 150px; /* Ширина ячеек времени */
-    }
-
-    button {
-        padding: 10px 20px;
-        cursor: pointer;
-        background-color: #5d4a3e;
-        color: #d3c1b2;
-        border: none;
-        border-radius: 4px;
-        transition: background-color 0.3s;
-        width: 100%;
-        font-size: 14px; /* Уменьшенный шрифт */
-    }
-
-    button:hover {
-        background-color: #8b735b;
-    }
-
-    @media (max-width: 600px) {
-        th, td {
-            padding: 6px; /* Уменьшенный отступ для мобильных устройств */
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #2b2b2b;
+            color: #d3c1b2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
-            padding: 10px;
+            max-width: 800px; /* Максимальная ширина контейнера */
+            width: 100%;
+            padding: 20px;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* Уменьшение ширины ячейки "День" для мобильных устройств */
-        td:nth-child(2) {
-            width: 25px; /* Еще меньше для мобильных устройств */
+        h1 {
+            text-align: center; /* Центрируем заголовок */
+            font-size: 24px; /* Уменьшаем шрифт заголовка */
+            margin-bottom: 20px;
         }
 
-        /* Уменьшение ширины ячейки "Имя" для мобильных устройств */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px; /* Уменьшенный шрифт */
+        }
+
+        th, td {
+            border: 1px solid #555;
+            padding: 8px; /* Уменьшенный отступ */
+            text-align: center; /* Выравнивание по центру */
+        }
+
+        th {
+            background-color: #4a3f35;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 6px; /* Уменьшенный отступ */
+            margin: 2px 0; /* Уменьшенный отступ */
+            background-color: #3a3a3a;
+            color: #d3c1b2;
+            border: 1px solid #555;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px; /* Уменьшенный шрифт */
+            text-align: center; /* Выравнивание по центру */
+        }
+
+        input:focus, select:focus {
+            border-color: #8b735b;
+            outline: none;
+        }
+
+        /* Ширина столбца "Имя" */
         td:nth-child(1) {
-            width: 60px; /* Еще меньше для мобильных устройств */
+            width: 20%; /* Ширина столбца "Имя" (можно изменить) */
         }
 
-        /* Уменьшение ширины ячеек времени для мобильных устройств */
-        td:nth-child(3),
+        /* Ширина столбца "День" */
+        td:nth-child(2) {
+            width: 10%; /* Ширина столбца "День" (можно изменить) */
+        }
+
+        /* Ширина столбца "Время (от)" */
+        td:nth-child(3) {
+            width: 20%; /* Ширина столбца "Время (от)" (можно изменить) */
+        }
+
+        /* Ширина столбца "Время (до)" */
         td:nth-child(4) {
-            width: 120px; /* Еще меньше для мобильных устройств */
+            width: 20%; /* Ширина столбца "Время (до)" (можно изменить) */
         }
-    }
-</style>
 
+        /* Ширина столбца "Статус" */
+        td:nth-child(5) {
+            width: 30%; /* Ширина столбца "Статус" (можно изменить) */
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #5d4a3e;
+            color: #d3c1b2;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-size: 14px; /* Уменьшенный шрифт */
+        }
+
+        button:hover {
+            background-color: #8b735b;
+        }
+
+        @media (max-width: 600px) {
+            th, td {
+                padding: 6px; /* Уменьшенный отступ для мобильных устройств */
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 20px; /* Еще меньше шрифт для мобильных устройств */
+            }
+
+            /* Уменьшение ширины столбцов для мобильных устройств */
+            td:nth-child(1) {
+                width: 25%; /* Ширина столбца "Имя" для мобильных устройств */
+            }
+
+            td:nth-child(2) {
+                width: 15%; /* Ширина столбца "День" для мобильных устройств */
+            }
+
+            td:nth-child(3),
+            td:nth-child(4) {
+                width: 20%; /* Ширина столбцов "Время" для мобильных устройств */
+            }
+
+            td:nth-child(5) {
+                width: 20%; /* Ширина столбца "Статус" для мобильных устройств */
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -153,84 +171,7 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Вт</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Ср</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Чт</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Пт</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Сб</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Вс</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
+                <!-- Остальные строки -->
             </tbody>
         </table>
 
