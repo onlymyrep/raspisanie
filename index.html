@@ -154,8 +154,8 @@
     </div>
 
     <script>
-        // URL вашей Google Form
-        const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSem1_1s2L6AQrkQFhqzPyqaumB5Cn15sK5yQq5Q-UvA8pXYig/formResponse';
+        // URL вашего Google Apps Script
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbzwRotmnEeMCWpZ7CjbeUTurM2rcCTeh62NcKlESxJQRtRNjSWGjR4x3M0obedSrcw/exec';
 
         // Добавление новых строк
         document.getElementById('add-row').addEventListener('click', () => {
@@ -196,21 +196,13 @@
 
             if (data.length > 0) {
                 try {
-                    // Отправка данных в Google Form
-                    const formData = new FormData();
-                    formData.append('entry.1234567890', data[0].name); // Замените на ID поля имени
-                    formData.append('entry.0987654321', data[0].day); // Замените на ID поля дня
-                    formData.append('entry.1122334455', data[0].timeStart); // Замените на ID поля времени начала
-                    formData.append('entry.5566778899', data[0].timeEnd); // Замените на ID поля времени окончания
-                    formData.append('entry.9988776655', data[0].status); // Замените на ID поля статуса
-
-                    const response = await fetch(formUrl, {
+                    const response = await fetch(scriptUrl, {
                         method: 'POST',
-                        body: formData,
-                        mode: 'no-cors' // Режим no-cors для обхода ограничений CORS
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data[0]) // Отправляем первую строку
                     });
-
-                    if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
                         alert('Данные успешно отправлены!');
                     } else {
                         alert('Ошибка при отправке данных.');
