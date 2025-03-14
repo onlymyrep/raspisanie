@@ -32,12 +32,13 @@
             border-collapse: collapse;
             margin: 20px 0;
             table-layout: fixed; /* Фиксированная ширина таблицы */
+            font-size: 14px; /* Уменьшенный шрифт */
         }
 
         th, td {
             border: 1px solid #555;
-            padding: 12px;
-            text-align: left;
+            padding: 8px; /* Уменьшенный отступ */
+            text-align: center; /* Выравнивание по центру */
         }
 
         th {
@@ -46,13 +47,15 @@
 
         input, select {
             width: 100%;
-            padding: 8px;
-            margin: 5px 0;
+            padding: 6px; /* Уменьшенный отступ */
+            margin: 2px 0; /* Уменьшенный отступ */
             background-color: #3a3a3a;
             color: #d3c1b2;
             border: 1px solid #555;
             border-radius: 4px;
             box-sizing: border-box;
+            font-size: 14px; /* Уменьшенный шрифт */
+            text-align: center; /* Выравнивание по центру */
         }
 
         input:focus, select:focus {
@@ -63,7 +66,12 @@
         /* Фиксированная ширина для ячеек времени */
         td:nth-child(3),
         td:nth-child(4) {
-            width: 160px; /* Ширина ячеек времени */
+            width: 120px; /* Ширина ячеек времени */
+        }
+
+        /* Уменьшение ширины ячейки "День" */
+        td:nth-child(2) {
+            width: 60px; /* Ширина ячейки "День" */
         }
 
         button {
@@ -75,6 +83,7 @@
             border-radius: 4px;
             transition: background-color 0.3s;
             width: 100%;
+            font-size: 14px; /* Уменьшенный шрифт */
         }
 
         button:hover {
@@ -83,11 +92,22 @@
 
         @media (max-width: 600px) {
             th, td {
-                padding: 8px;
+                padding: 6px; /* Уменьшенный отступ для мобильных устройств */
             }
 
             .container {
                 padding: 10px;
+            }
+
+            /* Уменьшение ширины ячеек времени для мобильных устройств */
+            td:nth-child(3),
+            td:nth-child(4) {
+                width: 100px;
+            }
+
+            /* Уменьшение ширины ячейки "День" для мобильных устройств */
+            td:nth-child(2) {
+                width: 50px;
             }
         }
     </style>
@@ -109,7 +129,7 @@
             <tbody>
                 <!-- 7 строк по умолчанию -->
                 <tr>
-                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td><input type="text" class="name" placeholder="Имя"></td>
                     <td>Пн</td>
                     <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                     <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
@@ -122,7 +142,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td><input type="text" class="name" placeholder="Имя"></td>
                     <td>Вт</td>
                     <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                     <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
@@ -135,7 +155,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td><input type="text" class="name" placeholder="Имя"></td>
                     <td>Ср</td>
                     <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                     <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
@@ -148,7 +168,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td><input type="text" class="name" placeholder="Имя"></td>
                     <td>Чт</td>
                     <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                     <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
@@ -161,7 +181,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td><input type="text" class="name" placeholder="Имя"></td>
                     <td>Пт</td>
                     <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                     <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
@@ -174,7 +194,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td><input type="text" class="name" placeholder="Имя"></td>
                     <td>Сб</td>
                     <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                     <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
@@ -187,7 +207,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td><input type="text" class="name" placeholder="Имя"></td>
                     <td>Вс</td>
                     <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                     <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
@@ -209,53 +229,54 @@
         // Инициализация EmailJS
         emailjs.init('9_tMAQ1P04QhyA085'); // Ваш User ID
 
-	        document.getElementById('submit').addEventListener('click', async () => {
-	    const rows = document.querySelectorAll('#schedule-table tbody tr');
-	    const data = [];
+        // Отправка данных
+        document.getElementById('submit').addEventListener('click', async () => {
+            const rows = document.querySelectorAll('#schedule-table tbody tr');
+            const data = [];
 
-	    rows.forEach(row => {
-	        const name = row.querySelector('.name').value || 'Не указано';
-	        const day = row.querySelector('td:nth-child(2)').textContent;
-	        const timeStart = row.querySelector('.time-start').value || 'Не указано';
-	        const timeEnd = row.querySelector('.time-end').value || 'Не указано';
-	        const status = row.querySelector('.status').value || 'Не указано';
+            rows.forEach(row => {
+                const name = row.querySelector('.name').value || 'Не указано';
+                const day = row.querySelector('td:nth-child(2)').textContent;
+                const timeStart = row.querySelector('.time-start').value || 'Не указано';
+                const timeEnd = row.querySelector('.time-end').value || 'Не указано';
+                const status = row.querySelector('.status').value || 'Не указано';
 
-	        // Если статус "Выходной" или "Отпуск", время не учитываем
-	        if (status === 'Выходной' || status === 'Отпуск') {
-	            data.push({ name, day, timeStart: '-', timeEnd: '-', status });
-	        } else {
-	            data.push({ name, day, timeStart, timeEnd, status });
-	        }
-	    });
+                // Если статус "Выходной" или "Отпуск", время не учитываем
+                if (status === 'Выходной' || status === 'Отпуск') {
+                    data.push({ name, day, timeStart: '-', timeEnd: '-', status });
+                } else {
+                    data.push({ name, day, timeStart, timeEnd, status });
+                }
+            });
 
-	    if (data.length > 0) {
-	        try {
-	            // Формируем данные для отправки
-	            const templateParams = {
-	                to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
-	                data: data // Передаем массив объектов
-	            };
+            if (data.length > 0) {
+                try {
+                    // Формируем данные для отправки
+                    const templateParams = {
+                        to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
+                        data: data // Передаем массив объектов
+                    };
 
-	            // Отправка данных через EmailJS
-	            const response = await emailjs.send(
-	                'service_2h0bb4p', // Ваш Service ID
-	                'template_kzxu2rt', // Ваш Template ID
-	                templateParams
-	            );
+                    // Отправка данных через EmailJS
+                    const response = await emailjs.send(
+                        'service_2h0bb4p', // Ваш Service ID
+                        'template_kzxu2rt', // Ваш Template ID
+                        templateParams
+                    );
 
-	            if (response.status === 200) {
-	                alert('Данные успешно отправлены!');
-	            } else {
-	                alert('Ошибка при отправке данных.');
-	            }
-	        } catch (error) {
-	            alert('Ошибка при отправке данных.');
-	            console.error('Ошибка:', error);
-	        }
-	    } else {
-	        alert('Добавьте хотя бы одну строку!');
-	    }
-	});
+                    if (response.status === 200) {
+                        alert('Данные успешно отправлены!');
+                    } else {
+                        alert('Ошибка при отправке данных.');
+                    }
+                } catch (error) {
+                    alert('Ошибка при отправке данных.');
+                    console.error('Ошибка:', error);
+                }
+            } else {
+                alert('Добавьте хотя бы одну строку!');
+            }
+        });
 
         // Скрытие полей времени при выборе "Выходной" или "Отпуск"
         document.querySelectorAll('.status').forEach(select => {
