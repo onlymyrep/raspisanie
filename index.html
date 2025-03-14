@@ -4,25 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расписание сотрудников</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 20px;
             background-color: #2b2b2b;
             color: #d3c1b2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 800px;
-            margin: 0 auto;
-            padding: 10px;
+            width: 100%;
+            padding: 20px;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background-color: #3a3a3a;
         }
 
         th, td {
@@ -51,13 +59,6 @@
             outline: none;
         }
 
-        .button-group {
-            margin: 20px 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
         button {
             padding: 10px 20px;
             cursor: pointer;
@@ -66,7 +67,7 @@
             border: none;
             border-radius: 4px;
             transition: background-color 0.3s;
-            flex: 1 1 auto;
+            width: 100%;
         }
 
         button:hover {
@@ -90,12 +91,8 @@
                 padding: 8px;
             }
 
-            .button-group {
-                flex-direction: column;
-            }
-
-            button {
-                width: 100%;
+            .container {
+                padding: 10px;
             }
         }
     </style>
@@ -103,11 +100,6 @@
 <body>
     <div class="container">
         <h1>График работы сотрудников</h1>
-
-        <div class="button-group">
-            <button id="add-row">Добавить строку</button>
-            <button id="submit">Отправить расписание</button>
-        </div>
 
         <table id="schedule-table">
             <thead>
@@ -120,19 +112,88 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- 7 строк по умолчанию -->
                 <tr>
                     <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td>Понедельник</td>
+                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
+                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
                     <td>
-                        <select class="day">
-                            <option value="Понедельник">Понедельник</option>
-                            <option value="Вторник">Вторник</option>
-                            <option value="Среда">Среда</option>
-                            <option value="Четверг">Четверг</option>
-                            <option value="Пятница">Пятница</option>
-                            <option value="Суббота">Суббота</option>
-                            <option value="Воскресенье">Воскресенье</option>
+                        <select class="status">
+                            <option value="Рабочий день">Рабочий день</option>
+                            <option value="Выходной">Выходной</option>
+                            <option value="Отпуск">Отпуск</option>
                         </select>
                     </td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td>Вторник</td>
+                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
+                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
+                    <td>
+                        <select class="status">
+                            <option value="Рабочий день">Рабочий день</option>
+                            <option value="Выходной">Выходной</option>
+                            <option value="Отпуск">Отпуск</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td>Среда</td>
+                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
+                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
+                    <td>
+                        <select class="status">
+                            <option value="Рабочий день">Рабочий день</option>
+                            <option value="Выходной">Выходной</option>
+                            <option value="Отпуск">Отпуск</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td>Четверг</td>
+                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
+                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
+                    <td>
+                        <select class="status">
+                            <option value="Рабочий день">Рабочий день</option>
+                            <option value="Выходной">Выходной</option>
+                            <option value="Отпуск">Отпуск</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td>Пятница</td>
+                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
+                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
+                    <td>
+                        <select class="status">
+                            <option value="Рабочий день">Рабочий день</option>
+                            <option value="Выходной">Выходной</option>
+                            <option value="Отпуск">Отпуск</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td>Суббота</td>
+                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
+                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
+                    <td>
+                        <select class="status">
+                            <option value="Рабочий день">Рабочий день</option>
+                            <option value="Выходной">Выходной</option>
+                            <option value="Отпуск">Отпуск</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td>Воскресенье</td>
                     <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                     <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
                     <td>
@@ -146,6 +207,8 @@
             </tbody>
         </table>
 
+        <button id="submit">Отправить расписание</button>
+
         <!-- Блок для диагностики -->
         <div class="debug">
             <h2>Диагностика</h2>
@@ -154,30 +217,8 @@
     </div>
 
     <script>
-        // URL вашего Google Apps Script
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbzwRotmnEeMCWpZ7CjbeUTurM2rcCTeh62NcKlESxJQRtRNjSWGjR4x3M0obedSrcw/exec';
-
-        // Добавление новых строк
-        document.getElementById('add-row').addEventListener('click', () => {
-            const tbody = document.querySelector('#schedule-table tbody');
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
-                <td>
-                    <select class="day">
-                        ${document.querySelector('.day').innerHTML}
-                    </select>
-                </td>
-                <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                <td>
-                    <select class="status">
-                        ${document.querySelector('.status').innerHTML}
-                    </select>
-                </td>
-            `;
-            tbody.appendChild(newRow);
-        });
+        // Инициализация EmailJS
+        emailjs.init('9_tMAQ1P04QhyA085'); // Замените на ваш User ID
 
         // Отправка данных
         document.getElementById('submit').addEventListener('click', async () => {
@@ -186,23 +227,34 @@
 
             rows.forEach(row => {
                 const name = row.querySelector('.name').value || 'Не указано';
-                const day = row.querySelector('.day').value || 'Не указано';
+                const day = row.querySelector('td:nth-child(2)').textContent;
                 const timeStart = row.querySelector('.time-start').value || 'Не указано';
                 const timeEnd = row.querySelector('.time-end').value || 'Не указано';
                 const status = row.querySelector('.status').value || 'Не указано';
 
-                data.push({ name, day, timeStart, timeEnd, status });
+                // Если статус "Выходной" или "Отпуск", время не учитываем
+                if (status === 'Выходной' || status === 'Отпуск') {
+                    data.push({ name, day, timeStart: '-', timeEnd: '-', status });
+                } else {
+                    data.push({ name, day, timeStart, timeEnd, status });
+                }
             });
 
             if (data.length > 0) {
                 try {
-                    const response = await fetch(scriptUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data[0]) // Отправляем первую строку
-                    });
-                    const result = await response.json();
-                    if (result.success) {
+                    // Отправка данных через EmailJS
+                    const templateParams = {
+                        to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
+                        data: data
+                    };
+
+                    const response = await emailjs.send(
+                        'service_2h0bb4p', // Замените на ваш Service ID
+                        'template_kzxu2rt', // Замените на ваш Template ID
+                        templateParams
+                    );
+
+                    if (response.status === 200) {
                         alert('Данные успешно отправлены!');
                     } else {
                         alert('Ошибка при отправке данных.');
@@ -214,6 +266,23 @@
             } else {
                 alert('Добавьте хотя бы одну строку!');
             }
+        });
+
+        // Скрытие полей времени при выборе "Выходной" или "Отпуск"
+        document.querySelectorAll('.status').forEach(select => {
+            select.addEventListener('change', (e) => {
+                const row = e.target.closest('tr');
+                const timeStart = row.querySelector('.time-start');
+                const timeEnd = row.querySelector('.time-end');
+
+                if (e.target.value === 'Выходной' || e.target.value === 'Отпуск') {
+                    timeStart.disabled = true;
+                    timeEnd.disabled = true;
+                } else {
+                    timeStart.disabled = false;
+                    timeEnd.disabled = false;
+                }
+            });
         });
     </script>
 </body>
