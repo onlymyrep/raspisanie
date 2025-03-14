@@ -180,46 +180,41 @@
         });
 
         // Отправка данных
-        document.getElementById('submit').addEventListener('click', async () => {
-            const rows = document.querySelectorAll('#schedule-table tbody tr');
-            const data = [];
+	  document.getElementById('submit').addEventListener('click', async () => {
+	  const rows = document.querySelectorAll('#schedule-table tbody tr');
+	  const data = [];
 
-            rows.forEach(row => {
-                const name = row.querySelector('.name').value || 'Не указано';
-                const day = row.querySelector('.day').value || 'Не указано';
-                const timeStart = row.querySelector('.time-start').value || 'Не указано';
-                const timeEnd = row.querySelector('.time-end').value || 'Не указано';
-                const status = row.querySelector('.status').value || 'Не указано';
+	  rows.forEach(row => {
+	    const name = row.querySelector('.name').value || 'Не указано';
+	    const day = row.querySelector('.day').value || 'Не указано';
+	    const timeStart = row.querySelector('.time-start').value || 'Не указано';
+	    const timeEnd = row.querySelector('.time-end').value || 'Не указано';
+	    const status = row.querySelector('.status').value || 'Не указано';
 
-                data.push({ name, day, timeStart, timeEnd, status });
-            });
+	    data.push({ name, day, timeStart, timeEnd, status });
+	  });
 
-            if (data.length > 0) {
-                // Вывод данных для диагностики
-                const debugOutput = document.getElementById('debug-output');
-                debugOutput.textContent = JSON.stringify(data, null, 2);
-
-                // Отправка данных на Google Apps Script
-                try {
-                    const response = await fetch(scriptUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data[0]) // Отправляем первую строку (можно адаптировать для нескольких строк)
-                    });
-                    const result = await response.json();
-                    if (result.success) {
-                        alert('Данные успешно отправлены!');
-                    } else {
-                        alert('Ошибка при отправке данных.');
-                    }
-                } catch (error) {
-                    alert('Ошибка при отправке данных.');
-                    console.error('Ошибка:', error);
-                }
-            } else {
-                alert('Добавьте хотя бы одну строку!');
-            }
-        });
+	  if (data.length > 0) {
+	    try {
+	      const response = await fetch(scriptUrl, {
+	        method: 'POST',
+	        headers: { 'Content-Type': 'application/json' },
+	        body: JSON.stringify(data[0]) // Отправляем первую строку
+	      });
+	      const result = await response.json();
+	      if (result.success) {
+	        alert('Данные успешно отправлены!');
+	      } else {
+	        alert('Ошибка при отправке данных.');
+	      }
+	    } catch (error) {
+	      alert('Ошибка при отправке данных.');
+	      console.error('Ошибка:', error);
+	    }
+	  } else {
+	    alert('Добавьте хотя бы одну строку!');
+	  }
+	});
     </script>
 </body>
 </html>
