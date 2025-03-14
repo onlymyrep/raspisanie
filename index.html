@@ -6,123 +6,122 @@
     <title>Расписание сотрудников</title>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-	<style>
-	    body {
-	        font-family: Arial, sans-serif;
-	        margin: 0;
-	        padding: 20px;
-	        background-color: #2b2b2b;
-	        color: #d3c1b2;
-	        display: flex;
-	        justify-content: center;
-	        align-items: center;
-	        min-height: 100vh;
-	    }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #2b2b2b;
+        color: #d3c1b2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
 
-	    .container {
-	        max-width: 800px;
-	        width: 100%;
-	        padding: 20px;
-	        background-color: #3a3a3a;
-	        border-radius: 8px;
-	        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	    }
+    .container {
+        max-width: 800px;
+        width: 100%;
+        padding: 20px;
+        background-color: #3a3a3a;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
 
-	    table {
-	        width: 100%;
-	        border-collapse: collapse;
-	        margin: 20px 0;
-	        table-layout: fixed; /* Фиксированная ширина таблицы */
-	        font-size: 14px; /* Уменьшенный шрифт */
-	    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        table-layout: fixed; /* Фиксированная ширина таблицы */
+        font-size: 14px; /* Уменьшенный шрифт */
+    }
 
-	    th, td {
-	        border: 1px solid #555;
-	        padding: 8px; /* Уменьшенный отступ */
-	        text-align: center; /* Выравнивание по центру */
-	    }
+    th, td {
+        border: 1px solid #555;
+        padding: 8px; /* Уменьшенный отступ */
+        text-align: center; /* Выравнивание по центру */
+    }
 
-	    th {
-	        background-color: #4a3f35;
-	    }
+    th {
+        background-color: #4a3f35;
+    }
 
-	    input, select {
-	        width: 100%;
-	        padding: 6px; /* Уменьшенный отступ */
-	        margin: 2px 0; /* Уменьшенный отступ */
-	        background-color: #3a3a3a;
-	        color: #d3c1b2;
-	        border: 1px solid #555;
-	        border-radius: 4px;
-	        box-sizing: border-box;
-	        font-size: 14px; /* Уменьшенный шрифт */
-	        text-align: center; /* Выравнивание по центру */
-	    }
+    input, select {
+        width: 100%;
+        padding: 6px; /* Уменьшенный отступ */
+        margin: 2px 0; /* Уменьшенный отступ */
+        background-color: #3a3a3a;
+        color: #d3c1b2;
+        border: 1px solid #555;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px; /* Уменьшенный шрифт */
+        text-align: center; /* Выравнивание по центру */
+    }
 
-	    input:focus, select:focus {
-	        border-color: #8b735b;
-	        outline: none;
-	    }
+    input:focus, select:focus {
+        border-color: #8b735b;
+        outline: none;
+    }
 
-	    /* Уменьшение ширины ячейки "День" */
-	    td:nth-child(2) {
-	        width: 30px; /* Минимальная ширина ячейки "День" */
-	    }
+    /* Уменьшение ширины ячейки "День" */
+    td:nth-child(2) {
+        width: 30px; /* Минимальная ширина ячейки "День" */
+    }
 
-	    /* Уменьшение ширины ячейки "Имя" */
-	    td:nth-child(1) {
-	        width: 80px; /* Минимальная ширина ячейки "Имя" */
-	    }
+    /* Уменьшение ширины ячейки "Имя" */
+    td:nth-child(1) {
+        width: 80px; /* Минимальная ширина ячейки "Имя" */
+    }
 
-	    /* Увеличение ширины ячеек времени */
-	    td:nth-child(3),
-	    td:nth-child(4) {
-	        width: 150px; /* Ширина ячеек времени */
-	    }
+    /* Увеличение ширины ячеек времени */
+    td:nth-child(3),
+    td:nth-child(4) {
+        width: 150px; /* Ширина ячеек времени */
+    }
 
-	    button {
-	        padding: 10px 20px;
-	        cursor: pointer;
-	        background-color: #5d4a3e;
-	        color: #d3c1b2;
-	        border: none;
-	        border-radius: 4px;
-	        transition: background-color 0.3s;
-	        width: 100%;
-	        font-size: 14px; /* Уменьшенный шрифт */
-	    }
+    button {
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: #5d4a3e;
+        color: #d3c1b2;
+        border: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        width: 100%;
+        font-size: 14px; /* Уменьшенный шрифт */
+    }
 
-	    button:hover {
-	        background-color: #8b735b;
-	    }
+    button:hover {
+        background-color: #8b735b;
+    }
 
-	    @media (max-width: 600px) {
-	        th, td {
-	            padding: 6px; /* Уменьшенный отступ для мобильных устройств */
-	        }
+    @media (max-width: 600px) {
+        th, td {
+            padding: 6px; /* Уменьшенный отступ для мобильных устройств */
+        }
 
-	        .container {
-	            padding: 10px;
-	        }
+        .container {
+            padding: 10px;
+        }
 
-	        /* Уменьшение ширины ячейки "День" для мобильных устройств */
-	        td:nth-child(2) {
-	            width: 25px; /* Еще меньше для мобильных устройств */
-	        }
+        /* Уменьшение ширины ячейки "День" для мобильных устройств */
+        td:nth-child(2) {
+            width: 25px; /* Еще меньше для мобильных устройств */
+        }
 
-	        /* Уменьшение ширины ячейки "Имя" для мобильных устройств */
-	        td:nth-child(1) {
-	            width: 60px; /* Еще меньше для мобильных устройств */
-	        }
+        /* Уменьшение ширины ячейки "Имя" для мобильных устройств */
+        td:nth-child(1) {
+            width: 60px; /* Еще меньше для мобильных устройств */
+        }
 
-	        /* Уменьшение ширины ячеек времени для мобильных устройств */
-	        td:nth-child(3),
-	        td:nth-child(4) {
-	            width: 120px; /* Еще меньше для мобильных устройств */
-	        }
-	    }
-	</style>
-
+        /* Уменьшение ширины ячеек времени для мобильных устройств */
+        td:nth-child(3),
+        td:nth-child(4) {
+            width: 120px; /* Еще меньше для мобильных устройств */
+        }
+    }
+</style>
 
 </head>
 <body>
