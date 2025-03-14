@@ -31,6 +31,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            table-layout: fixed; /* Фиксированная ширина таблицы */
         }
 
         th, td {
@@ -59,6 +60,12 @@
             outline: none;
         }
 
+        /* Фиксированная ширина для ячеек времени */
+        td:nth-child(3),
+        td:nth-child(4) {
+            width: 120px; /* Ширина ячеек времени */
+        }
+
         button {
             padding: 10px 20px;
             cursor: pointer;
@@ -72,18 +79,6 @@
 
         button:hover {
             background-color: #8b735b;
-        }
-
-        .debug {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #3a3a3a;
-            border: 1px solid #555;
-            border-radius: 4px;
-        }
-
-        .debug h2 {
-            margin-top: 0;
         }
 
         @media (max-width: 600px) {
@@ -208,17 +203,11 @@
         </table>
 
         <button id="submit">Отправить расписание</button>
-
-        <!-- Блок для диагностики -->
-        <div class="debug">
-            <h2>Диагностика</h2>
-            <pre id="debug-output"></pre>
-        </div>
     </div>
 
     <script>
         // Инициализация EmailJS
-        emailjs.init('9_tMAQ1P04QhyA085'); // Замените на ваш User ID
+        emailjs.init('9_tMAQ1P04QhyA085'); // Ваш User ID
 
         // Отправка данных
         document.getElementById('submit').addEventListener('click', async () => {
@@ -242,15 +231,16 @@
 
             if (data.length > 0) {
                 try {
-                    // Отправка данных через EmailJS
+                    // Формируем данные для отправки
                     const templateParams = {
                         to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
-                        data: data
+                        data: JSON.stringify(data) // Преобразуем данные в строку JSON
                     };
 
+                    // Отправка данных через EmailJS
                     const response = await emailjs.send(
-                        'service_2h0bb4p', // Замените на ваш Service ID
-                        'template_kzxu2rt', // Замените на ваш Template ID
+                        'service_2h0bb4p', // Ваш Service ID
+                        'template_kzxu2rt', // Ваш Template ID
                         templateParams
                     );
 
