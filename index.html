@@ -195,7 +195,6 @@
                         </select>
                     </td>
                 </tr>
-                <!-- Остальные дни недели -->
                 <!-- Вторник -->
                 <tr>
                     <td><input type="text" class="name" placeholder="Имя"></td>
@@ -295,7 +294,7 @@
             const rows = document.querySelectorAll('#schedule-table tbody tr');
             const data = [];
 
-            rows.forEach(row => {
+            rows.forEach((row, index) => {
                 const name = row.querySelector('.name').value || 'Не указано';
                 const day = row.querySelector('td:nth-child(2)').textContent;
                 const timeStart = row.querySelector('.time-start').value || 'Не указано';
@@ -315,7 +314,7 @@
                     // Формируем данные для отправки
                     const templateParams = {
                         to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
-                        data: data // Передаем массив объектов
+                        data: JSON.stringify(data) // Преобразуем данные в строку JSON
                     };
 
                     // Отправка данных через EmailJS
