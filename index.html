@@ -73,8 +73,7 @@
         button:hover {
             background-color: #8b735b;
         }
-
-        .debug {
+	.debug {
             margin-top: 20px;
             padding: 10px;
             background-color: #3a3a3a;
@@ -158,7 +157,7 @@
     </div>
 
     <script>
-        emailjs.init('9_tMAQ1P04QhyA085'); // Замените на ваш User ID
+        emailjs.init('9_tMAQ1P04QhyA085'); // Ваш User ID
 
         // Добавление новых строк
         document.getElementById('add-row').addEventListener('click', () => {
@@ -203,7 +202,7 @@
             if (data.length > 0) {
                 // Вывод данных для диагностики
                 const debugOutput = document.getElementById('debug-output');
-                debugOutput.textContent = JSON.stringify({ to_email: 'recipient@example.com', data }, null, 2);
+                debugOutput.textContent = JSON.stringify({ to_email: 'tfgryujhgh@gmail.com', data }, null, 2);
 
                 sendEmail(data);
             } else {
