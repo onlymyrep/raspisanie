@@ -68,6 +68,18 @@
         button:hover {
             background-color: #8b735b;
         }
+
+        .debug {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #3a3a3a;
+            border: 1px solid #555;
+            border-radius: 4px;
+        }
+
+        .debug h2 {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -117,6 +129,12 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Блок для диагностики -->
+        <div class="debug">
+            <h2>Диагностика</h2>
+            <pre id="debug-output"></pre>
+        </div>
     </div>
 
     <script>
@@ -164,6 +182,10 @@
             });
 
             if (data.length > 0) {
+                // Вывод данных для диагностики
+                const debugOutput = document.getElementById('debug-output');
+                debugOutput.textContent = JSON.stringify({ to_email: 'recipient@example.com', data }, null, 2);
+
                 sendEmail(data);
             } else {
                 alert('Добавьте хотя бы одну заполненную строку!');
@@ -172,7 +194,7 @@
 
         function sendEmail(data) {
             const templateParams = {
-                to_email: 'recipient@example.com', // Укажите email получателя
+                to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
                 data: data
             };
 
