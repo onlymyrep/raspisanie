@@ -209,54 +209,53 @@
         // Инициализация EmailJS
         emailjs.init('9_tMAQ1P04QhyA085'); // Ваш User ID
 
-        // Отправка данных
-        document.getElementById('submit').addEventListener('click', async () => {
-            const rows = document.querySelectorAll('#schedule-table tbody tr');
-            const data = [];
+	        document.getElementById('submit').addEventListener('click', async () => {
+	    const rows = document.querySelectorAll('#schedule-table tbody tr');
+	    const data = [];
 
-            rows.forEach(row => {
-                const name = row.querySelector('.name').value || 'Не указано';
-                const day = row.querySelector('td:nth-child(2)').textContent;
-                const timeStart = row.querySelector('.time-start').value || 'Не указано';
-                const timeEnd = row.querySelector('.time-end').value || 'Не указано';
-                const status = row.querySelector('.status').value || 'Не указано';
+	    rows.forEach(row => {
+	        const name = row.querySelector('.name').value || 'Не указано';
+	        const day = row.querySelector('td:nth-child(2)').textContent;
+	        const timeStart = row.querySelector('.time-start').value || 'Не указано';
+	        const timeEnd = row.querySelector('.time-end').value || 'Не указано';
+	        const status = row.querySelector('.status').value || 'Не указано';
 
-                // Если статус "Выходной" или "Отпуск", время не учитываем
-                if (status === 'Выходной' || status === 'Отпуск') {
-                    data.push({ name, day, timeStart: '-', timeEnd: '-', status });
-                } else {
-                    data.push({ name, day, timeStart, timeEnd, status });
-                }
-            });
+	        // Если статус "Выходной" или "Отпуск", время не учитываем
+	        if (status === 'Выходной' || status === 'Отпуск') {
+	            data.push({ name, day, timeStart: '-', timeEnd: '-', status });
+	        } else {
+	            data.push({ name, day, timeStart, timeEnd, status });
+	        }
+	    });
 
-            if (data.length > 0) {
-                try {
-                    // Формируем данные для отправки
-                    const templateParams = {
-                        to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
-                        data: JSON.stringify(data) // Преобразуем данные в строку JSON
-                    };
+	    if (data.length > 0) {
+	        try {
+	            // Формируем данные для отправки
+	            const templateParams = {
+	                to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
+	                data: data // Передаем массив объектов
+	            };
 
-                    // Отправка данных через EmailJS
-                    const response = await emailjs.send(
-                        'service_2h0bb4p', // Ваш Service ID
-                        'template_kzxu2rt', // Ваш Template ID
-                        templateParams
-                    );
+	            // Отправка данных через EmailJS
+	            const response = await emailjs.send(
+	                'service_2h0bb4p', // Ваш Service ID
+	                'template_kzxu2rt', // Ваш Template ID
+	                templateParams
+	            );
 
-                    if (response.status === 200) {
-                        alert('Данные успешно отправлены!');
-                    } else {
-                        alert('Ошибка при отправке данных.');
-                    }
-                } catch (error) {
-                    alert('Ошибка при отправке данных.');
-                    console.error('Ошибка:', error);
-                }
-            } else {
-                alert('Добавьте хотя бы одну строку!');
-            }
-        });
+	            if (response.status === 200) {
+	                alert('Данные успешно отправлены!');
+	            } else {
+	                alert('Ошибка при отправке данных.');
+	            }
+	        } catch (error) {
+	            alert('Ошибка при отправке данных.');
+	            console.error('Ошибка:', error);
+	        }
+	    } else {
+	        alert('Добавьте хотя бы одну строку!');
+	    }
+	});
 
         // Скрытие полей времени при выборе "Выходной" или "Отпуск"
         document.querySelectorAll('.status').forEach(select => {
