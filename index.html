@@ -16,6 +16,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
+            padding: 10px;
         }
 
         table {
@@ -43,6 +44,7 @@
             color: #d3c1b2;
             border: 1px solid #555;
             border-radius: 4px;
+            box-sizing: border-box; /* Для корректного отображения на мобильных устройствах */
         }
 
         input:focus, select:focus, textarea:focus {
@@ -52,17 +54,20 @@
 
         .button-group {
             margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Отступы между кнопками */
         }
 
         button {
             padding: 10px 20px;
-            margin-right: 10px;
             cursor: pointer;
             background-color: #5d4a3e;
             color: #d3c1b2;
             border: none;
             border-radius: 4px;
             transition: background-color 0.3s;
+            flex: 1 1 auto; /* Гибкие кнопки для мобильных устройств */
         }
 
         button:hover {
@@ -79,6 +84,21 @@
 
         .debug h2 {
             margin-top: 0;
+        }
+
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 600px) {
+            th, td {
+                padding: 8px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -169,16 +189,15 @@
             const data = [];
 
             rows.forEach(row => {
-                const name = row.querySelector('.name').value;
-                const day = row.querySelector('.day').value;
-                const timeStart = row.querySelector('.time-start').value;
-                const timeEnd = row.querySelector('.time-end').value;
-                const status = row.querySelector('.status').value;
-                const comment = row.querySelector('.comment').value;
+                const name = row.querySelector('.name').value || 'Не указано';
+                const day = row.querySelector('.day').value || 'Не указано';
+                const timeStart = row.querySelector('.time-start').value || 'Не указано';
+                const timeEnd = row.querySelector('.time-end').value || 'Не указано';
+                const status = row.querySelector('.status').value || 'Не указано';
+                const comment = row.querySelector('.comment').value || 'Нет комментария';
 
-                if (name && day && timeStart && timeEnd && status) {
-                    data.push({ name, day, timeStart, timeEnd, status, comment });
-                }
+                // Добавляем данные, даже если некоторые поля пустые
+                data.push({ name, day, timeStart, timeEnd, status, comment });
             });
 
             if (data.length > 0) {
@@ -188,7 +207,7 @@
 
                 sendEmail(data);
             } else {
-                alert('Добавьте хотя бы одну заполненную строку!');
+                alert('Добавьте хотя бы одну строку!');
             }
         });
 
