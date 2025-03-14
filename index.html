@@ -172,13 +172,16 @@
 
         function sendEmail(data) {
             const templateParams = {
-                to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
+                to_email: 'recipient@example.com', // Укажите email получателя
                 data: data
             };
 
             emailjs.send('service_2h0bb4p', 'template_kzxu2rt', templateParams)
                 .then(() => alert('График успешно отправлен!'))
-                .catch(() => alert('Ошибка при отправке графика'));
+                .catch((error) => {
+                    alert('Ошибка при отправке графика.');
+                    console.error('Ошибка:', error);
+                });
         }
     </script>
 </body>
