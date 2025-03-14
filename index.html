@@ -122,7 +122,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td><input type="text" class="name" placeholder="ФИО"></td>
                     <td>
                         <select class="day">
                             <option value="Понедельник">Понедельник</option>
@@ -163,7 +163,7 @@
             const tbody = document.querySelector('#schedule-table tbody');
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
-                <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                <td><input type="text" class="name" placeholder="ФИО"></td>
                 <td>
                     <select class="day">
                         ${document.querySelector('.day').innerHTML}
