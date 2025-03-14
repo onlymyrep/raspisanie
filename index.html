@@ -1,131 +1,190 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Заполните форму</title>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    form {
-      max-width: 400px;
-      margin: 0 auto;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание сотрудников</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #2b2b2b;
+            color: #d3c1b2;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #3a3a3a;
+        }
+
+        th, td {
+            border: 1px solid #555;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4a3f35;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            background-color: #3a3a3a;
+            color: #d3c1b2;
+            border: 1px solid #555;
+            border-radius: 4px;
+        }
+
+        input:focus, select:focus {
+            border-color: #8b735b;
+            outline: none;
+        }
+
+        .button-group {
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #5d4a3e;
+            color: #d3c1b2;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #8b735b;
+        }
+    </style>
 </head>
 <body>
-  <h1>Заполните форму</h1>
-  <form id="schedule-form">
-    <label for="name">Имя:</label>
-    <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+    <div class="container">
+        <h1>График работы сотрудников</h1>
+        
+        <div class="button-group">
+            <button id="add-row">Добавить строку</button>
+            <button id="submit">Отправить расписание</button>
+        </div>
 
-    <label for="day">День недели:</label>
-    <select id="day" name="day" required>
-      <option value="Понедельник">Понедельник</option>
-      <option value="Вторник">Вторник</option>
-      <option value="Среда">Среда</option>
-      <option value="Четверг">Четверг</option>
-      <option value="Пятница">Пятница</option>
-      <option value="Суббота">Суббота</option>
-      <option value="Воскресенье">Воскресенье</option>
-    </select>
+        <table id="schedule-table">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>День недели</th>
+                    <th>Время начала</th>
+                    <th>Время окончания</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                    <td>
+                        <select class="day">
+                            <option value="Понедельник">Понедельник</option>
+                            <option value="Вторник">Вторник</option>
+                            <option value="Среда">Среда</option>
+                            <option value="Четверг">Четверг</option>
+                            <option value="Пятница">Пятница</option>
+                            <option value="Суббота">Суббота</option>
+                            <option value="Воскресенье">Воскресенье</option>
+                        </select>
+                    </td>
+                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
+                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <label for="time-start">Время (от):</label>
-    <input type="time" id="time-start" name="time-start" min="07:00" max="00:00">
+    <script>
+        emailjs.init('9_tMAQ1P04QhyA085');
 
-    <label for="time-end">Время (до):</label>
-    <input type="time" id="time-end" name="time-end" min="07:00" max="00:00">
-
-    <label for="status">Статус:</label>
-    <select id="status" name="status" required>
-      <option value="Рабочий день">Рабочий день</option>
-      <option value="Выходной">Выходной</option>
-      <option value="Отпуск">Отпуск</option>
-    </select>
-
-    <label for="comment">Комментарий:</label>
-    <textarea id="comment" name="comment" placeholder="Например, причина отпуска"></textarea>
-
-    <button type="submit">Отправить данные</button>
-    <button type="button" id="send-email">Отправить итоговую таблицу на почту</button>
-  </form>
-
-  <script>
-    // Инициализация EmailJS
-    emailjs.init('9_tMAQ1P04QhyA085'); // Ваш User ID
-
-    // Обработка отправки формы
-    document.getElementById('schedule-form').addEventListener('submit', (event) => {
-      event.preventDefault(); // Отменяем стандартное поведение формы
-
-      // Собираем данные из формы
-      const formData = {
-        name: document.getElementById('name').value,
-        day: document.getElementById('day').value,
-        timeStart: document.getElementById('time-start').value || 'Не указано',
-        timeEnd: document.getElementById('time-end').value || 'Не указано',
-        status: document.getElementById('status').value,
-        comment: document.getElementById('comment').value || 'Нет комментария'
-      };
-
-      // Отправляем данные в Google Sheets
-      saveToGoogleSheets(formData)
-        .then(() => {
-          alert('Данные успешно отправлены!');
-          document.getElementById('schedule-form').reset(); // Очистка формы
-        })
-        .catch((error) => {
-          alert('Ошибка при отправке данных.');
-          console.error('Ошибка:', error);
+        // Добавление новых строк
+        document.getElementById('add-row').addEventListener('click', () => {
+            const tbody = document.querySelector('#schedule-table tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><input type="text" class="name" placeholder="ФИО сотрудника"></td>
+                <td>
+                    <select class="day">
+                        ${document.querySelector('.day').innerHTML}
+                    </select>
+                </td>
+                <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
+                <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
+            `;
+            tbody.appendChild(newRow);
         });
-    });
 
-    // Функция для отправки данных в Google Sheets
-    function saveToGoogleSheets(data) {
-      return fetch('https://script.google.com/macros/s/AKfycbxmkQ9zBCFjzLUURn8NYAjiEpOpk2OKfGcGQmn_sk2LuDeKIY0OqMnw34NVkdXzaJWM-/exec', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
+        // Отправка данных
+        document.getElementById('submit').addEventListener('click', () => {
+            const rows = document.querySelectorAll('#schedule-table tbody tr');
+            const data = [];
+
+            rows.forEach(row => {
+                const name = row.querySelector('.name').value;
+                const day = row.querySelector('.day').value;
+                const timeStart = row.querySelector('.time-start').value;
+                const timeEnd = row.querySelector('.time-end').value;
+
+                if (name && day && timeStart && timeEnd) {
+                    data.push({ name, day, timeStart, timeEnd });
+                }
+            });
+
+            if (data.length > 0) {
+                sendEmail(data);
+            } else {
+                alert('Добавьте хотя бы одну заполненную строку!');
+            }
+        });
+
+        function sendEmail(data) {
+            const tableContent = data.map(row => `
+                <tr>
+                    <td>${row.name}</td>
+                    <td>${row.day}</td>
+                    <td>${row.timeStart}</td>
+                    <td>${row.timeEnd}</td>
+                </tr>
+            `).join('');
+
+            const emailBody = `
+                <h1>График работы сотрудников</h1>
+                <table border="1" style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <thead>
+                        <tr>
+                            <th>Имя</th>
+                            <th>День недели</th>
+                            <th>Начало</th>
+                            <th>Окончание</th>
+                        </tr>
+                    </thead>
+                    <tbody>${tableContent}</tbody>
+                </table>
+            `;
+
+            emailjs.send('service_2h0bb4p', 'template_kzxu2rt', {
+                to_email: 'tfgryujhgh@gmail.com',
+                subject: 'График работы сотрудников',
+                message: emailBody
+            })
+            .then(() => alert('График успешно отправлен!'))
+            .catch(() => alert('Ошибка при отправке графика'));
         }
-      });
-    }
-
-    // Обработка отправки итоговой таблицы
-    document.getElementById('send-email').addEventListener('click', () => {
-      fetch('https://script.google.com/macros/s/AKfycbxmkQ9zBCFjzLUURn8NYAjiEpOpk2OKfGcGQmn_sk2LuDeKIY0OqMnw34NVkdXzaJWM-/exec?function=sendEmailWithTable')
-        .then(() => alert('Итоговая таблица отправлена на почту!'))
-        .catch((error) => {
-          alert('Ошибка при отправке таблицы.');
-          console.error('Ошибка:', error);
-        });
-    });
-  </script>
+    </script>
 </body>
 </html>
