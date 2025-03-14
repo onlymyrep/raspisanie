@@ -35,7 +35,7 @@
             background-color: #4a3f35;
         }
 
-        input, select {
+        input, select, textarea {
             width: 100%;
             padding: 8px;
             margin: 5px 0;
@@ -45,7 +45,7 @@
             border-radius: 4px;
         }
 
-        input:focus, select:focus {
+        input:focus, select:focus, textarea:focus {
             border-color: #8b735b;
             outline: none;
         }
@@ -86,6 +86,8 @@
                     <th>День недели</th>
                     <th>Время начала</th>
                     <th>Время окончания</th>
+                    <th>Статус</th>
+                    <th>Комментарий</th>
                 </tr>
             </thead>
             <tbody>
@@ -104,13 +106,21 @@
                     </td>
                     <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                     <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
+                    <td>
+                        <select class="status">
+                            <option value="Рабочий день">Рабочий день</option>
+                            <option value="Выходной">Выходной</option>
+                            <option value="Отпуск">Отпуск</option>
+                        </select>
+                    </td>
+                    <td><textarea class="comment" placeholder="Комментарий"></textarea></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <script>
-        emailjs.init('9_tMAQ1P04QhyA085');
+        emailjs.init('9_tMAQ1P04QhyA085'); // Замените на ваш User ID
 
         // Добавление новых строк
         document.getElementById('add-row').addEventListener('click', () => {
@@ -125,6 +135,12 @@
                 </td>
                 <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
                 <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
+                <td>
+                    <select class="status">
+                        ${document.querySelector('.status').innerHTML}
+                    </select>
+                </td>
+                <td><textarea class="comment" placeholder="Комментарий"></textarea></td>
             `;
             tbody.appendChild(newRow);
         });
@@ -139,9 +155,11 @@
                 const day = row.querySelector('.day').value;
                 const timeStart = row.querySelector('.time-start').value;
                 const timeEnd = row.querySelector('.time-end').value;
+                const status = row.querySelector('.status').value;
+                const comment = row.querySelector('.comment').value;
 
-                if (name && day && timeStart && timeEnd) {
-                    data.push({ name, day, timeStart, timeEnd });
+                if (name && day && timeStart && timeEnd && status) {
+                    data.push({ name, day, timeStart, timeEnd, status, comment });
                 }
             });
 
@@ -153,37 +171,14 @@
         });
 
         function sendEmail(data) {
-            const tableContent = data.map(row => `
-                <tr>
-                    <td>${row.name}</td>
-                    <td>${row.day}</td>
-                    <td>${row.timeStart}</td>
-                    <td>${row.timeEnd}</td>
-                </tr>
-            `).join('');
+            const templateParams = {
+                to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
+                data: data
+            };
 
-            const emailBody = `
-                <h1>График работы сотрудников</h1>
-                <table border="1" style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-                    <thead>
-                        <tr>
-                            <th>Имя</th>
-                            <th>День недели</th>
-                            <th>Начало</th>
-                            <th>Окончание</th>
-                        </tr>
-                    </thead>
-                    <tbody>${tableContent}</tbody>
-                </table>
-            `;
-
-            emailjs.send('service_2h0bb4p', 'template_kzxu2rt', {
-                to_email: 'tfgryujhgh@gmail.com',
-                subject: 'График работы сотрудников',
-                message: emailBody
-            })
-            .then(() => alert('График успешно отправлен!'))
-            .catch(() => alert('Ошибка при отправке графика'));
+            emailjs.send('service_2h0bb4p', 'template_kzxu2rt', templateParams)
+                .then(() => alert('График успешно отправлен!'))
+                .catch(() => alert('Ошибка при отправке графика'));
         }
     </script>
 </body>
