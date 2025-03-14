@@ -1,27 +1,54 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
+  background-color: #2b2b2b; /* Тёмный матовый фон */
+  color: #d3c1b2; /* Светло-коричневый текст */
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
+  background-color: #3a3a3a; /* Тёмно-серый фон таблицы */
+  color: #d3c1b2; /* Светло-коричневый текст */
 }
 
 th, td {
-  border: 1px solid #ddd;
+  border: 1px solid #555; /* Тёмно-серая граница */
   padding: 8px;
   text-align: left;
+}
+
+th {
+  background-color: #4a3f35; /* Тёмно-коричневый фон заголовков */
+  color: #d3c1b2; /* Светло-коричневый текст */
 }
 
 input, select {
   width: 100%;
   padding: 5px;
+  background-color: #3a3a3a; /* Тёмно-серый фон */
+  color: #d3c1b2; /* Светло-коричневый текст */
+  border: 1px solid #555; /* Тёмно-серая граница */
+  border-radius: 4px;
+}
+
+input:focus, select:focus {
+  border-color: #8b735b; /* Коричневая граница при фокусе */
+  outline: none;
 }
 
 button {
   padding: 10px 20px;
   margin-right: 10px;
   cursor: pointer;
+  background-color: #5d4a3e; /* Тёмно-коричневый фон кнопки */
+  color: #d3c1b2; /* Светло-коричневый текст */
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #8b735b; /* Светло-коричневый фон при наведении */
 }
