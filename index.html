@@ -170,172 +170,147 @@
     <div class="container">
         <h1>График работы сотрудников</h1>
 
-        <table id="schedule-table">
-            <thead>
-                <tr>
-                    <th>Имя</th>
-                    <th>День</th>
-                    <th>Время (от)</th>
-                    <th>Время (до)</th>
-                    <th>Статус</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Понедельник -->
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Пн</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <!-- Вторник -->
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Вт</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <!-- Среда -->
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Ср</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <!-- Четверг -->
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Чт</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <!-- Пятница -->
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Пт</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <!-- Суббота -->
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Сб</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-                <!-- Воскресенье -->
-                <tr>
-                    <td><input type="text" class="name" placeholder="Имя"></td>
-                    <td>Вс</td>
-                    <td><input type="time" class="time-start" min="07:00" max="00:00"></td>
-                    <td><input type="time" class="time-end" min="07:00" max="00:00"></td>
-                    <td>
-                        <select class="status">
-                            <option value="Рабочий день">Рабочий день</option>
-                            <option value="Выходной">Выходной</option>
-                            <option value="Отпуск">Отпуск</option>
-                        </select>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <form id="form">
+            <table id="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>День</th>
+                        <th>Время (от)</th>
+                        <th>Время (до)</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Понедельник -->
+                    <tr>
+                        <td><input type="text" name="name" class="name" placeholder="Имя"></td>
+                        <td>Пн</td>
+                        <td><input type="time" name="timeStart" class="time-start" min="07:00" max="00:00"></td>
+                        <td><input type="time" name="timeEnd" class="time-end" min="07:00" max="00:00"></td>
+                        <td>
+                            <select name="status" class="status">
+                                <option value="Рабочий день">Рабочий день</option>
+                                <option value="Выходной">Выходной</option>
+                                <option value="Отпуск">Отпуск</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Вторник -->
+                    <tr>
+                        <td><input type="text" name="name" class="name" placeholder="Имя"></td>
+                        <td>Вт</td>
+                        <td><input type="time" name="timeStart" class="time-start" min="07:00" max="00:00"></td>
+                        <td><input type="time" name="timeEnd" class="time-end" min="07:00" max="00:00"></td>
+                        <td>
+                            <select name="status" class="status">
+                                <option value="Рабочий день">Рабочий день</option>
+                                <option value="Выходной">Выходной</option>
+                                <option value="Отпуск">Отпуск</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Среда -->
+                    <tr>
+                        <td><input type="text" name="name" class="name" placeholder="Имя"></td>
+                        <td>Ср</td>
+                        <td><input type="time" name="timeStart" class="time-start" min="07:00" max="00:00"></td>
+                        <td><input type="time" name="timeEnd" class="time-end" min="07:00" max="00:00"></td>
+                        <td>
+                            <select name="status" class="status">
+                                <option value="Рабочий день">Рабочий день</option>
+                                <option value="Выходной">Выходной</option>
+                                <option value="Отпуск">Отпуск</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Четверг -->
+                    <tr>
+                        <td><input type="text" name="name" class="name" placeholder="Имя"></td>
+                        <td>Чт</td>
+                        <td><input type="time" name="timeStart" class="time-start" min="07:00" max="00:00"></td>
+                        <td><input type="time" name="timeEnd" class="time-end" min="07:00" max="00:00"></td>
+                        <td>
+                            <select name="status" class="status">
+                                <option value="Рабочий день">Рабочий день</option>
+                                <option value="Выходной">Выходной</option>
+                                <option value="Отпуск">Отпуск</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Пятница -->
+                    <tr>
+                        <td><input type="text" name="name" class="name" placeholder="Имя"></td>
+                        <td>Пт</td>
+                        <td><input type="time" name="timeStart" class="time-start" min="07:00" max="00:00"></td>
+                        <td><input type="time" name="timeEnd" class="time-end" min="07:00" max="00:00"></td>
+                        <td>
+                            <select name="status" class="status">
+                                <option value="Рабочий день">Рабочий день</option>
+                                <option value="Выходной">Выходной</option>
+                                <option value="Отпуск">Отпуск</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Суббота -->
+                    <tr>
+                        <td><input type="text" name="name" class="name" placeholder="Имя"></td>
+                        <td>Сб</td>
+                        <td><input type="time" name="timeStart" class="time-start" min="07:00" max="00:00"></td>
+                        <td><input type="time" name="timeEnd" class="time-end" min="07:00" max="00:00"></td>
+                        <td>
+                            <select name="status" class="status">
+                                <option value="Рабочий день">Рабочий день</option>
+                                <option value="Выходной">Выходной</option>
+                                <option value="Отпуск">Отпуск</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Воскресенье -->
+                    <tr>
+                        <td><input type="text" name="name" class="name" placeholder="Имя"></td>
+                        <td>Вс</td>
+                        <td><input type="time" name="timeStart" class="time-start" min="07:00" max="00:00"></td>
+                        <td><input type="time" name="timeEnd" class="time-end" min="07:00" max="00:00"></td>
+                        <td>
+                            <select name="status" class="status">
+                                <option value="Рабочий день">Рабочий день</option>
+                                <option value="Выходной">Выходной</option>
+                                <option value="Отпуск">Отпуск</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <button id="submit">Отправить расписание</button>
+            <button id="button" type="submit">Отправить расписание</button>
+        </form>
     </div>
 
     <script>
         // Инициализация EmailJS
         emailjs.init('9_tMAQ1P04QhyA085'); // Ваш User ID
 
-        // Отправка данных
-        document.getElementById('submit').addEventListener('click', async () => {
-            const rows = document.querySelectorAll('#schedule-table tbody tr');
-            const data = [];
+        const btn = document.getElementById("button");
 
-            rows.forEach((row, index) => {
-                const name = row.querySelector('.name').value || 'Не указано';
-                const day = row.querySelector('td:nth-child(2)').textContent;
-                const timeStart = row.querySelector('.time-start').value || 'Не указано';
-                const timeEnd = row.querySelector('.time-end').value || 'Не указано';
-                const status = row.querySelector('.status').value || 'Не указано';
+        document.getElementById("form").addEventListener("submit", function (event) {
+            event.preventDefault();
 
-                // Если статус "Выходной" или "Отпуск", время не учитываем
-                if (status === 'Выходной' || status === 'Отпуск') {
-                    data.push({ name, day, timeStart: '-', timeEnd: '-', status });
-                } else {
-                    data.push({ name, day, timeStart, timeEnd, status });
+            btn.value = "Sending...";
+
+            const serviceID = "service_2h0bb4p"; // Ваш Service ID
+            const templateID = "template_kzxu2rt"; // Ваш Template ID
+
+            emailjs.sendForm(serviceID, templateID, this).then(
+                () => {
+                    btn.value = "Отправить расписание";
+                    alert("Данные успешно отправлены!");
+                },
+                (err) => {
+                    btn.value = "Отправить расписание";
+                    alert("Ошибка при отправке данных: " + JSON.stringify(err));
                 }
-            });
-
-            if (data.length > 0) {
-                try {
-                    // Формируем данные для отправки
-                    const templateParams = {
-                        to_email: 'tfgryujhgh@gmail.com', // Укажите email получателя
-                        data: JSON.stringify(data) // Преобразуем данные в строку JSON
-                    };
-
-                    // Отправка данных через EmailJS
-                    const response = await emailjs.send(
-                        'service_2h0bb4p', // Ваш Service ID
-                        'template_kzxu2rt', // Ваш Template ID
-                        templateParams
-                    );
-
-                    if (response.status === 200) {
-                        alert('Данные успешно отправлены!');
-                    } else {
-                        alert('Ошибка при отправке данных.');
-                    }
-                } catch (error) {
-                    alert('Ошибка при отправке данных.');
-                    console.error('Ошибка:', error);
-                }
-            } else {
-                alert('Добавьте хотя бы одну строку!');
-            }
+            );
         });
 
         // Скрытие полей времени при выборе "Выходной" или "Отпуск"
