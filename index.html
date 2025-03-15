@@ -67,20 +67,16 @@
             border-color: #8b735b;
             outline: none;
         }
-
-        select {
+	select {
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d3c1b2'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d3c1b2'%3e%>
             background-repeat: no-repeat;
-            background-position: right 8px center;
-            background-size: 12px;
-        }
+            background-position: right 8px center;                                                                                                                 background-size: 12px;                                                                                                                             }
 
         input[type="time"] {
-            appearance: none;
-            -webkit-appearance: none;
+            appearance: none;                                                                                                                                      -webkit-appearance: none;
             -moz-appearance: none;
         }
 
@@ -145,9 +141,7 @@
             td:nth-child(2) {
                 width: 15%;
             }
-
-            td:nth-child(3),
-            td:nth-child(4) {
+	    td:nth-child(3),                                                                                                                                       td:nth-child(4) {
                 width: 20%;
             }
 
@@ -283,6 +277,17 @@
         emailjs.init('9_tMAQ1P04QhyA085'); // Ваш User ID
 
         const btn = document.getElementById("button");
+
+        // Обработчик события для автоматического заполнения имени
+        document.querySelector('input[name="name1"]').addEventListener('input', function (e) {
+            const nameValue = e.target.value; // Получаем значение из первой ячейки имени
+            const nameInputs = document.querySelectorAll('input[class="name"]'); // Все ячейки имени
+
+            // Заполняем все ячейки имени значением из первой ячейки
+            nameInputs.forEach(input => {
+                input.value = nameValue;
+            });
+        });
 
         document.getElementById("form").addEventListener("submit", function (event) {
             event.preventDefault();
